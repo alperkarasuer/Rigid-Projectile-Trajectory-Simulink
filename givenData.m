@@ -1,4 +1,4 @@
-clear all
+clear
 
 %% Constants
 dt = 0.01;
@@ -109,5 +109,5 @@ vInit = -cos(alphaInit)*sin(betaInit)*Vm_mpers;
 wInit = sin(alphaInit)*Vm_mpers;
 
 save('data.mat')
-clear all
+clear
 

@@ -4,13 +4,17 @@ clc
 
 %% Simulation
 % Load Variables
-run('givenData.m')
-inits = load('data.mat');
+if(isfile('data.mat'))
+    inits = load('data.mat');
+else
+    run('givenData.m')
+    inits = load('data.mat');
+end
 
 % Set Simulation Parameters for Simulink
 paramStruct.StopTime = 'inf';
 paramStruct.SolverType = 'Fixed-step';
-paramStruct.Solver = 'FixedStepAuto';
+paramStruct.Solver = 'ode1';
 paramStruct.FixedStep = num2str(inits.dt);
 
 % Run the Model and Save Variables to Workspace
@@ -25,39 +29,35 @@ endTime = simOut.tout(end);
 figure('Name', 'X-Y-H, 3D Trajectory')
 set(gcf, 'WindowState', 'maximized');
 plot3(simOut.Xe(:,1), simOut.Xe(:,2), simOut.altitude)
-xlim([0 endTime])
 title('Trajectory','FontSize',14)
-xlabel('X Axis','FontSize',12)
-ylabel('Y Axis','FontSize',12)
-zlabel('Altitude','FontSize',12)
+xlabel('X Axis (m)','FontSize',12)
+ylabel('Y Axis (m)','FontSize',12)
+zlabel('Altitude (m)','FontSize',12)
 
 
 % X-H Plot
 figure('Name', 'X-H Plot')
 set(gcf, 'WindowState', 'maximized');
 plot(simOut.Xe(:,1), simOut.altitude)
-xlim([0 endTime])
 title('X-H Plot','FontSize',14)
-xlabel('X Axis','FontSize',12)
-ylabel('Altitude','FontSize',12)
+xlabel('X Axis (m)','FontSize',12)
+ylabel('Altitude (m)','FontSize',12)
 
 % Y-H Plot
 figure('Name', 'Y-H Plot')
 set(gcf, 'WindowState', 'maximized');
 plot(simOut.Xe(:,2), simOut.altitude)
-xlim([0 endTime])
 title('Y-H Plot','FontSize',14)
-xlabel('Y Axis','FontSize',12)
-ylabel('Altitude','FontSize',12)
+xlabel('Y Axis (m)','FontSize',12)
+ylabel('Altitude (m)','FontSize',12)
 
 % X-Y Plot
 figure('Name', 'X-Y Plot')
 set(gcf, 'WindowState', 'maximized');
 plot(simOut.Xe(:,1), simOut.Xe(:,2))
-xlim([0 endTime])
 title('X-Y Plot','FontSize',14)
-xlabel('X Axis','FontSize',12)
-ylabel('Y Axis','FontSize',12)
+xlabel('X Axis (m)','FontSize',12)
+ylabel('Y Axis (m)','FontSize',12)
 
 % Body Angular Rates Plots
 figure('Name', 'p-q-r Body Angular Rates Plots')
