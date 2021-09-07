@@ -1,5 +1,5 @@
 clear
-close all
+close
 clc
 
 %% Simulation
@@ -33,7 +33,6 @@ title('Trajectory','FontSize',14)
 xlabel('X Axis (m)','FontSize',12)
 ylabel('Y Axis (m)','FontSize',12)
 zlabel('Altitude (m)','FontSize',12)
-
 
 % X-H Plot
 figure('Name', 'X-H Plot')
